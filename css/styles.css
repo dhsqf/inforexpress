@@ -1,0 +1,114 @@
+:root{
+  --preto:#000000;
+  --laranja:#FFB200;
+  --branco:#FFFFFF;
+  --muted:rgba(255,255,255,0.75);
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  --max-width:1100px;
+  --gap:22px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Reset e base */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:
+  radial-gradient(1200px 600px at 10% 10%, rgba(255,178,0,0.06), transparent 6%),
+  radial-gradient(900px 400px at 90% 90%, rgba(255,178,0,0.03), transparent 6%),
+  var(--preto);
+  color:var(--branco);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* Container principal */
+.container{
+  max-width:var(--max-width);
+  margin:18px auto;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr 340px;
+  gap:var(--gap);
+}
+
+/* Painel / card */
+.panel{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:20px;
+  border-radius:var(--radius);
+  box-shadow:0 8px 30px rgba(0,0,0,0.6);
+}
+
+/* Header / marca */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:64px;width:auto;border-radius:8px;display:block}
+.brand .title{font-weight:800;letter-spacing:0.2px;font-size:18px}
+.brand .sub{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* Navegação */
+nav{display:flex;gap:10px;align-items:center}
+.nav-link{font-weight:600;padding:8px 12px;border-radius:9px;color:rgba(255,255,255,0.85)}
+
+/* Hero */
+.hero{padding:6px 0}
+.h-title{font-size:34px;margin:6px 0;line-height:1.02}
+.h-sub{color:var(--muted);font-size:15px;margin-bottom:16px;max-width:760px}
+
+/* Serviços / recursos */
+.features{display:flex;gap:12px;flex-wrap:wrap}
+.feature{flex:1;min-width:200px;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.015),transparent);border:1px solid rgba(255,255,255,0.03)}
+.feature h4{margin:0 0 8px 0}
+.feature p{margin:0;color:var(--muted);font-size:13px}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px;border-radius:12px;font-weight:800;cursor:pointer;border:none}
+.btn-ticket{background:var(--laranja);color:var(--preto)}
+.btn-wpp{background:transparent;border:2px solid var(--laranja);color:var(--laranja);padding:10px 12px;border-radius:12px;font-weight:700}
+
+/* Aside */
+aside{display:flex;flex-direction:column;gap:14px}
+.cta{display:flex;flex-direction:column;gap:12px}
+
+/* Texto informativo e chips */
+.info{font-size:13px;color:var(--muted);line-height:1.4}
+.chip{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-size:13px}
+
+/* Footer */
+footer{grid-column:1 / -1;margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.footer-links{display:flex;gap:12px;align-items:center}
+
+/* Mobile floating bar: hidden por padrão, visível só em telas pequenas */
+.mobile-bar{display:none;position:fixed;left:12px;right:12px;bottom:18px;gap:12px;z-index:60}
+.mobile-bar .panel{display:flex;gap:10px;padding:10px;border-radius:12px;align-items:center;justify-content:space-between}
+.mobile-bar .mbtn{flex:1;padding:12px;border-radius:12px;font-weight:800;border:none;cursor:pointer}
+
+/* Animações sutis */
+.fade-up{transform:translateY(6px);opacity:0;animation:fadeUp .6s ease forwards}
+.delay-1{animation-delay:.06s}.delay-2{animation-delay:.12s}.delay-3{animation-delay:.18s}
+@keyframes fadeUp{to{transform:none;opacity:1}}
+
+/* Helpers */
+.muted{color:var(--muted)}
+
+/* Responsivo */
+@media (max-width:980px){
+  .container{grid-template-columns:1fr;padding:14px;gap:14px}
+  .brand img{height:56px}
+  .h-title{font-size:28px}
+  .hero{margin-bottom:8px}
+  aside{order:2}
+  .mobile-bar{display:flex}
+  /* Ajustes de espaçamento para mobile */
+  .panel{padding:16px}
+  .btn{padding:10px}
+  .feature{min-width:unset}
+}
+
+/* Segurança: garante que a barra móvel só apareça em telas pequenas */
+.mobile-bar{display:none !important}
+@media (max-width:980px){ .mobile-bar{display:flex !important} }
+
+/* Força apenas um botão Abrir Chamado por comportamento esperado:
+   - botão central .btn-ticket (desktop + mobile)
+   - botão móvel reusa a mesma classe para estilização */
+.btn-ticket, .mobile-bar .btn-ticket { display:inline-flex; }
